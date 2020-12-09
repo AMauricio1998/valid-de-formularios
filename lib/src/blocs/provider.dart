@@ -22,16 +22,19 @@ class Provider extends InheritedWidget {
     : super(key: key, child: child );
 
 
+
+
   final loginBloc = LoginBloc();
 
-  // Provider({ Key key, Widget child })
-  //   : super(key: key, child: child );
 
  
   @override
+  
+
   bool updateShouldNotify(InheritedWidget oldWidget) => true;
 
   static LoginBloc of ( BuildContext context ) {
+    
     return ( context.inheritFromWidgetOfExactType(Provider) as Provider ).loginBloc;
   }
 
