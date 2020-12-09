@@ -104,25 +104,30 @@ class LoginPage extends StatelessWidget {
 
   Widget _crearBoton(LoginBloc bloc) {
     return StreamBuilder(
-      stream: bloc,
+      stream: bloc.formValidStream,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        return Container(
-          child: child,
-        );
+        return RaisedButton(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 20.0),
+              child: Text('ingresar'),
+            ),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0)),
+            elevation: 0.0,
+            color: Colors.deepPurple,
+            textColor: Colors.white,
+            onPressed: snapshot.hasData ? () => _login(bloc, context) : null);
       },
-    ),
-
-    return RaisedButton(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 20.0),
-        child: Text('ingresar'),
-      ),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0)),
-      elevation: 0.0,
-      color: Colors.deepPurple,
-      textColor: Colors.white,
-      onPressed: () {},
     );
+  }
+
+  _login(LoginBloc bloc, BuildContext context) {
+    print('----------------------------');
+    print('Email: ${bloc.email}');
+    print('Password: ${bloc.password}');
+    print('----------------------------');
+
+    Navigator.pushReplacementNamed(context, 'home');
   }
 
   Widget _crearFondo(BuildContext context) {
